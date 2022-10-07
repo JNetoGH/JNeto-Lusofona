@@ -1,4 +1,4 @@
-# LOSOFONA UNIVERSITY REPOSITORY
+# LOSOFONA UNIVERSITY REPOSITORY.
 
 
 - it's a repository created for my university
