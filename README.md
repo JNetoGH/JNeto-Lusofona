@@ -1,4 +1,4 @@
-# LUSOFONA UNIVERSITY REPOSITORY.
+# LUSOFONA UNIVERSITY REPOSITORY
 
 it's a repository created for my university, here you can find some exercises and homeworks.
 
