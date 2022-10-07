@@ -1,4 +1,4 @@
-# Computacao
+# Computação
 - it's another repository for my university
 - here you can find some exercises and homeworks
 
