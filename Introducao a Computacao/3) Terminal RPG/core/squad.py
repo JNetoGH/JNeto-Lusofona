@@ -15,9 +15,9 @@ class Squad:
 
         for i in range(0, len(self.characterList)):
             if i == len(self.characterList) - 1:
-                string_builder.append("[" + str(i) + "] " + self.characterList[i].to_string())
+                string_builder.append("index in squad [" + str(i) + "] \n" + self.characterList[i].to_string())
             else:
-                string_builder.append_line("[" + str(i) + "] " + self.characterList[i].to_string())
+                string_builder.append_line("index in squad [" + str(i) + "] \n" + self.characterList[i].to_string())
                 string_builder.append_line("")
 
         return string_builder.to_string()
