@@ -18,3 +18,5 @@ class Squad:
                 string_builder.append_line("[" + str(i) + "] " + self.characterList[i].to_string())
         return string_builder.to_string()
 
+    def get_characterList(self) -> list[Character]:
+        return self.characterList

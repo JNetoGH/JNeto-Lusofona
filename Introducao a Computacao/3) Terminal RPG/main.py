@@ -19,7 +19,6 @@ class BattleWinner(Enum):
 class InitiativePhase:
     pass
 
-#todo implementar a ui do d20 durante a fase Initiative
 #todo IMPLEMENTAR a sgunda fase de aCTION
 #todo solve draw cases in Action Order
 class Round:
@@ -57,13 +56,13 @@ class Round:
     # basically checks if the character is alive, then set his/her currentActionPhaseOrder
     # then, adds the character to the _actionPhaseOrder, anf it sorts the list according to the action phase order
     def generate_action_phase_order_for_chars_in_squad_and_add_then_to_action_phase_order_list(self, squad: Squad):
-        for char in squad.characterList:
+        for char in squad.get_characterList():
             if char.get_if_is_alive_and_update_char_action_phase_order():
                 d20: int = jneto_utility_methods.roll_dice(0, 20)
-                char.currentActionPhaseOrder = char.initiative + d20
+                char.set_currentActionPhaseOrder(char.initiative + d20)
                 self._actionPhaseOrder.append(char)
                 print(f"Name: {char.name} | Action Order => Initiative ({char.initiative}) + D20 ({d20})"
-                      f" => {char.currentActionPhaseOrder}")
+                      f" => {char.get_currentActionPhaseOrder()}")
 
     def select_sort_actionPhaseOrder_list(self):
         size = len(self._actionPhaseOrder)
@@ -72,7 +71,7 @@ class Round:
             for i in range(step + 1, size):
                 # to sort in descending order, change > to < in this line
                 # select the minimum element in each loop
-                if self._actionPhaseOrder[i].currentActionPhaseOrder > self._actionPhaseOrder[min_idx].currentActionPhaseOrder:
+                if self._actionPhaseOrder[i].get_currentActionPhaseOrder() > self._actionPhaseOrder[min_idx].get_currentActionPhaseOrder():
                     min_idx = i
             # put min at the correct position
             (self._actionPhaseOrder[step], self._actionPhaseOrder[min_idx]) = (self._actionPhaseOrder[min_idx], self._actionPhaseOrder[step])
@@ -92,10 +91,10 @@ class Round:
         are_all_player_chars_dead = True
         are_all_enemy_chars_dead = True
         # checks if all characters in each one of the squads are dead or not
-        for enemy_char in self.enemySquad.characterList:
+        for enemy_char in self.enemySquad.get_characterList():
             if enemy_char.get_if_is_alive_and_update_char_action_phase_order():
                 are_all_enemy_chars_dead = False
-        for player_char in self.playerSquad.characterList:
+        for player_char in self.playerSquad.get_characterList():
             if player_char.get_if_is_alive_and_update_char_action_phase_order():
                 are_all_player_chars_dead = False
         # if one of the two squads are completely dead, a winner is found
@@ -138,8 +137,6 @@ class Battle:
     def init_new_round(self):
         self.currentRound = Round(self.playerSquad, self.enemySquad)
         self.battleWinner = self.currentRound.get_battle_winner()
-
-
 
 
 squadPlayer = Squad([Character("JNeto", 5, 10, 10, 10, 11), Character("Dani", 0, 10, 10, 10, 10)])
