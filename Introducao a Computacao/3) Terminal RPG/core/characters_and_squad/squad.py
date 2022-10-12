@@ -1,4 +1,4 @@
-from core.character import Character
+from core.characters_and_squad.character import Character
 from utilities.jneto_string_builder import StringBuilder
 
 

@@ -31,7 +31,7 @@ class Character:
             self._currentActionPhaseOrder = NULL_ACTION_PHASE_ORDER
         return is_it_alive
 
-    def get_currentActionPhaseOrder(self) -> int:
+    def get_char_currentActionPhaseOrder(self) -> int:
         return self._currentActionPhaseOrder
 
     def set_currentActionPhaseOrder(self, value: int):

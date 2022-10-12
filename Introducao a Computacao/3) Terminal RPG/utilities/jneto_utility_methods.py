@@ -1,3 +1,4 @@
+from utilities.jneto_string_builder import StringBuilder
 import random
 
 
@@ -19,3 +20,11 @@ def list_to_str(s):
 
     # return string
     return (str1.join(s))
+
+
+def actionPhaseOrder_to_string(actionPhaseOrder_list: list) -> str:
+    str_builder: StringBuilder = StringBuilder()
+    for char in actionPhaseOrder_list:
+        str_builder.append(" | " + char.name)
+    str_builder.append(" | ")
+    return str_builder.to_string()
