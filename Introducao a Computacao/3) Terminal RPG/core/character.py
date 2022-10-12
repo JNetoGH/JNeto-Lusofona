@@ -1,5 +1,4 @@
-from enum import Enum
-from utilities.string_builder import StringBuilder
+from utilities.jneto_string_builder import StringBuilder
 
 NULL_ACTION_PHASE_ORDER: int = 0
 
@@ -24,15 +23,10 @@ class Character:
         str_builder.append(" | Armor: " + str(self.armor))
         str_builder.append(" | Weapon Dmg: " + str(self.weapon_dmg))
         str_builder.append(" | Initiative: " + str(self.initiative))
-
-        action_phase_order_msg: str = \
-            "DEAD" if self.currentActionPhaseOrder == NULL_ACTION_PHASE_ORDER else str(self.currentActionPhaseOrder)
-        str_builder.append(" | Action Phase Order: " + action_phase_order_msg)
-
         return str_builder.to_string()
 
     def get_if_is_alive_and_update_char_action_phase_order(self):
         is_it_alive = self.hp > 0
         if not is_it_alive:
-            self._currentActionPhaseOrder = NULL_ACTION_PHASE_ORDER
+            self.currentActionPhaseOrder = NULL_ACTION_PHASE_ORDER
         return is_it_alive

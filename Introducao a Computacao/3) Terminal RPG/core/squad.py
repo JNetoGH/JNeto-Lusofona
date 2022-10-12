@@ -1,5 +1,5 @@
-from core.character import *
-from utilities.string_builder import StringBuilder
+from core.character import Character
+from utilities.jneto_string_builder import StringBuilder
 
 
 class Squad:
@@ -10,14 +10,11 @@ class Squad:
         self.characterList = characters_list
 
     def to_string(self) -> str:
-
         string_builder = StringBuilder()
-
         for i in range(0, len(self.characterList)):
             if i == len(self.characterList) - 1:
-                string_builder.append("index in squad [" + str(i) + "] \n" + self.characterList[i].to_string())
+                string_builder.append("[" + str(i) + "] " + self.characterList[i].to_string())
             else:
-                string_builder.append_line("index in squad [" + str(i) + "] \n" + self.characterList[i].to_string())
-                string_builder.append_line("")
-
+                string_builder.append_line("[" + str(i) + "] " + self.characterList[i].to_string())
         return string_builder.to_string()
+
