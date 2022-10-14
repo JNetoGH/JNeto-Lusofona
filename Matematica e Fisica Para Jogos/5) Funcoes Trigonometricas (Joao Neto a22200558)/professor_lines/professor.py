@@ -9,7 +9,6 @@ DISPLAYSURF = pygame.display.set_mode((400, 400))
 WHITE = (255, 255, 255)
 CYAN = (0, 255, 255)
 
-
 x1 = 10
 y1 = 50
 angle = 0
@@ -17,20 +16,11 @@ y2 = y1 + 50  # 50 y1 + 50 == initialposYAnterior + 50
 y3 = y1 + 100  # igual acima mas 100
 y4 = y1 + 150  # igual acima mas 100
 
-my_line_y1 = y1 + 200  # igual acima mas 100
-my_line_y2 = y1 + 250  # igual acima mas 100
-
 while True:  # Main loop--
 
     my_lines_fases = numpy.pi # Deslocamento da origem do gráfico
 
     for event in pygame.event.get():
-        if event.type == K_LEFT:
-            DISPLAYSURF.fill((0,0,0))
-            my_lines_fases -= numpy.pi
-        if event.type == K_RIGHT:
-            print("oi")
-            my_lines_fases += numpy.pi
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
@@ -42,17 +32,10 @@ while True:  # Main loop--
     amplitude = 10
     pygame.draw.circle(DISPLAYSURF, (255, 0, 0), [x1, y2 + amplitude * math.cos(angle)], 1)
 
-    fase = numpy.pi # Deslocamento da origem do gráfico
+    fase = numpy.pi  # Deslocamento da origem do gráfico
     pygame.draw.circle(DISPLAYSURF, (255, 126, 126), [x1, y3 + amplitude * math.cos(angle + fase)], 1)
 
     frequencia = 0.5
     pygame.draw.circle(DISPLAYSURF, (0, 0, 255), [x1, y4 + amplitude * math.cos(angle * frequencia)], 1)
-
-    # MINHAS LINHAS
-    my_line_frequencia1 = 2
-    pygame.draw.circle(DISPLAYSURF, CYAN, [x1, my_line_y1 + amplitude * math.cos(angle + my_lines_fases)], 1)
-
-    my_line_frequencia2 = 4
-    pygame.draw.circle(DISPLAYSURF, (255,255,0), [x1, my_line_y2 + amplitude * math.cos(angle + my_lines_fases)], 1)
 
     pygame.display.update()
