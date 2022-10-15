@@ -3,33 +3,36 @@ from pygame.locals import *
 import math
 import numpy
 
+
 pygame.init()
 DISPLAY_SURF = pygame.display.set_mode((400, 400))
 
-CYAN = (0, 255, 255)
-YELLOW = (255, 255, 0)
-
-# valor inicial em X
-# mas tb é incrementado acada update representado a posição em x atual do ponto da linha a ser desenhado
-x = 10
-angle = 0
-
-# valor inicial em Y
-# é somado em cada update ao cos do angulo para dar a variação em y do ponto da linha a ser desenhado
-my_line_y1 = 200
-my_line_y2 = 300
-
-my_lines_amplitude = 10
-my_lines_fase = numpy.pi  # "Deslocamento da origem do gráfico", is changed via user input
-my_line1_frequency = 2
-my_line2_frequency = 4
-
-# text
+# TEXT
 textX, textY = 400, 100
 font = pygame.font.Font('freesansbold.ttf', 20)
 text = font.render('press A and D or left and right arrow', True, (0, 255, 0), (0, 0, 128))
 textRect = text.get_rect()
 textRect.center = (textX // 2, textY // 2)
+
+CYAN = (0, 255, 255)
+YELLOW = (255, 255, 0)
+
+class JNetoLine:
+    def __init__(self, initial_pos: list, amplitude, fase, frequency):
+        self.initial_pos: list = initial_pos
+        self.current_pos: list = [initial_pos[0], initial_pos[1]]
+        self.angle = 0
+        self.frequency = frequency
+        self.fase = fase
+        self.amplitude = amplitude
+
+    def reset_pos_to_initial(self):
+        self.current_pos[0] = self.initial_pos[0]
+        self.current_pos[1] = self.initial_pos[1]
+
+
+line1: JNetoLine = JNetoLine([10, 200], 50, numpy.pi, 2)
+line2: JNetoLine = JNetoLine([10, 300], 20, numpy.pi, 4)
 
 while True:  # Main loop--
 
@@ -37,8 +40,10 @@ while True:  # Main loop--
     DISPLAY_SURF.blit(text, textRect)
 
     # INCREMENTS X_axis and angle
-    x = x + 1
-    angle = angle + 0.1
+    line1.current_pos[0] += 1
+    line1.angle += 0.1
+    line2.current_pos[0] += 1
+    line2.angle += 0.1
 
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
@@ -50,25 +55,23 @@ while True:  # Main loop--
                 # CLEARS THE SCREEN
                 DISPLAY_SURF.fill((0, 0, 0))
                 # RESETS THE LINE WITH A NEW FASE
-                my_lines_fase += 0.1
-                x = 10
-                my_line_y1 = 200
+                line1.reset_pos_to_initial()
+                line1.fase += 0.1
+                line2.reset_pos_to_initial()
+                line2.fase += 0.1
             if event.key == pygame.K_LEFT or event.key == pygame.K_d:
                 # CLEARS THE SCREEN
                 DISPLAY_SURF.fill((0, 0, 0))
                 # RESETS THE LINE WITH A NEW FASE
-                my_lines_fase -= 0.1
-                x = 10
-                my_line_y2 = 300
+                line1.reset_pos_to_initial()
+                line1.fase -= 0.1
+                line2.reset_pos_to_initial()
+                line2.fase -= 0.1
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
 
     # DRAWING MY LINES
-
-    pygame.draw.circle(DISPLAY_SURF, CYAN,
-                       [x, my_line_y1 + my_lines_amplitude * math.cos(angle * my_line1_frequency + my_lines_fase)], 1)
-    pygame.draw.circle(DISPLAY_SURF, YELLOW,
-                       [x, my_line_y2 + my_lines_amplitude * math.cos(angle * my_line2_frequency + my_lines_fase)], 1)
-
+    pygame.draw.circle(DISPLAY_SURF, CYAN, [line1.current_pos[0], line1.current_pos[1] + line1.amplitude * math.cos(line1.angle * line1.frequency + line1.fase)], 1)
+    pygame.draw.circle(DISPLAY_SURF, YELLOW,  [line2.current_pos[0], line2.current_pos[1] + line2.amplitude * math.cos(line2.angle * line2.frequency + line2.fase)], 1)
     pygame.display.update()
