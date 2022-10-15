@@ -31,7 +31,7 @@ class JNetoLine:
         self.current_pos[1] = self.initial_pos[1]
 
 
-line1: JNetoLine = JNetoLine([10, 200], 50, numpy.pi, 2)
+line1: JNetoLine = JNetoLine([10, 200], 50, numpy.pi, 1)
 line2: JNetoLine = JNetoLine([10, 300], 20, numpy.pi, 4)
 
 while True:  # Main loop--
@@ -45,29 +45,28 @@ while True:  # Main loop--
     line2.current_pos[0] += 1
     line2.angle += 0.1
 
+    # if event.key == pygame.K_RIGHT or event.key == pygame.K_a
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
             print(event.key)
             if event.key == pygame.K_ESCAPE:
                 pygame.quit()
                 sys.exit()
-            if event.key == pygame.K_RIGHT or event.key == pygame.K_a:
+            elif event.key == pygame.K_RIGHT or event.key == pygame.K_a or event.key == pygame.K_LEFT or event.key == pygame.K_d:
                 # CLEARS THE SCREEN
                 DISPLAY_SURF.fill((0, 0, 0))
-                # RESETS THE LINE WITH A NEW FASE
+                # RESETS THE LINE WITH
                 line1.reset_pos_to_initial()
-                line1.fase += 0.1
                 line2.reset_pos_to_initial()
-                line2.fase += 0.1
-            if event.key == pygame.K_LEFT or event.key == pygame.K_d:
-                # CLEARS THE SCREEN
-                DISPLAY_SURF.fill((0, 0, 0))
-                # RESETS THE LINE WITH A NEW FASE
-                line1.reset_pos_to_initial()
-                line1.fase -= 0.1
-                line2.reset_pos_to_initial()
-                line2.fase -= 0.1
-        if event.type == QUIT:
+                if event.key == pygame.K_RIGHT or event.key == pygame.K_a:
+                    # SETS A NEW FASE TO THE LINES A NEW FASE
+                    line1.fase += 0.1
+                    line2.fase += 0.1
+                elif event.key == pygame.K_LEFT or event.key == pygame.K_d:
+                    # SETS A NEW FASE TO THE LINES A NEW FASE
+                    line1.fase -= 0.1
+                    line2.fase -= 0.1
+        elif event.type == QUIT:
             pygame.quit()
             sys.exit()
 
