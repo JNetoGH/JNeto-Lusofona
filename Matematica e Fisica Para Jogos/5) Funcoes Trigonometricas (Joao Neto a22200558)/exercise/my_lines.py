@@ -32,7 +32,7 @@ class JNetoLine:
         self.current_pos[1] = self.initial_pos[1]
 
 
-line1: JNetoLine = JNetoLine([10, 200], 50, numpy.pi, 1)
+line1: JNetoLine = JNetoLine([10, 200], 30, numpy.pi, 1)
 line2: JNetoLine = JNetoLine([10, 300], 20, numpy.pi, 2)
 
 while True:
