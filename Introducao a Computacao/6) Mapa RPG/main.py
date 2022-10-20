@@ -45,7 +45,6 @@ class Player:
             print(f"ERROR: \"{code}\" (passes a boundary or is not valid)")
         self.print_pos_status()
 
-
     def print_pos_status(self):
         print("pos: " + map[self.pos[Axis.VERTICAL]][self.pos[Axis.HORIZONTAL]])
         print(f"current index: [{self.pos[Axis.VERTICAL]}][{self.pos[Axis.HORIZONTAL]}]\n")
