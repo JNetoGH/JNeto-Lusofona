@@ -1,4 +1,3 @@
-from core.battle_structure.round import *
 from core.characters_and_squad.character import Character
 from core.characters_and_squad.squad import Squad
 from utilities import jneto_utility_methods

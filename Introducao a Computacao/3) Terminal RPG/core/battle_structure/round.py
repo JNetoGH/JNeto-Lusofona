@@ -1,7 +1,6 @@
 from core.characters_and_squad.character import Character
 from core.characters_and_squad.squad import Squad
 from core.battle_structure.InitiativePhase import InitiativePhase
-from utilities.jneto_string_builder import StringBuilder
 from enum import Enum
 
 
@@ -21,11 +20,14 @@ class Round:
 
     _playerSquad: Squad
     _enemySquad: Squad
+
     # holds the current Turn phase (active or initiative)
     _currentRoundPhase: RoundPhase
     _initiativePhase: InitiativePhase
+
     # holds the living characters in order to the action phase
     _actionPhaseOrder: list[Character] = []
+
     # holds a winner(player or enemy) or undefined value
     _battleWinner: BattleWinner = BattleWinner.UNDEFINED
 
@@ -70,6 +72,4 @@ class Round:
 
     def get_battle_winner(self) -> BattleWinner:
         return self._battleWinner
-
-
 
