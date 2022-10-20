@@ -4,7 +4,7 @@ map = [["a", "b", "c"],
 
 
 def print_map():
-    print("MAPA", end="")
+    print("MAP", end="")
     for i in range(0, len(map)):
         print("\n|", end="")
         for j in range(0, len(map[0])):
@@ -27,23 +27,24 @@ class Player:
         print_map()
         print("You tried to move: " + code)
 
+        is_code_valid = False
         if code == "EAST" and self.pos[Axis.HORIZONTAL] + 1 < len(map[0]):
             self.pos[Axis.HORIZONTAL] += 1
-            self.print_pos_status()
-            return
+            is_code_valid = True
         elif code == "WEST" and self.pos[1] - 1 >= 0:
             self.pos[Axis.HORIZONTAL] -= 1
-            self.print_pos_status()
-            return
+            is_code_valid = True
         elif code == "SOUTH" and self.pos[Axis.VERTICAL] + 1 < len(map):
             self.pos[Axis.VERTICAL] += 1
-            self.print_pos_status()
-            return
+            is_code_valid = True
         elif code == "NORTH" and self.pos[Axis.VERTICAL] - 1 >= 0:
             self.pos[Axis.VERTICAL] -= 1
-            self.print_pos_status()
-            return
-        print("NOT VALID")
+            is_code_valid = True
+
+        if not is_code_valid:
+            print(f"ERROR: \"{code}\" (passes a boundary or is not valid)")
+        self.print_pos_status()
+
 
     def print_pos_status(self):
         print("pos: " + map[self.pos[Axis.VERTICAL]][self.pos[Axis.HORIZONTAL]])
@@ -54,4 +55,5 @@ print_map()
 joao = Player([0, 1])  # x, y
 while True:
     value = input("choose a direction: ").upper()
+    print()
     joao.move(value)
