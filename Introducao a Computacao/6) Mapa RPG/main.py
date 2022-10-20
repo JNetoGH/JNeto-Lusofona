@@ -16,6 +16,7 @@ class Axis:
     HORIZONTAL: int = 1
     VERTICAL: int = 0
 
+
 class Player:
 
     def __init__(self, initial_pos: list[int]):
@@ -50,9 +51,13 @@ class Player:
         print(f"current index: [{self.pos[Axis.VERTICAL]}][{self.pos[Axis.HORIZONTAL]}]\n")
 
 
+print("COMMANDS: quit, north, south, east, west\n")
 print_map()
 joao = Player([0, 1])  # x, y
+
 while True:
     value = input("choose a direction: ").upper()
+    if value == "QUIT":
+        break
     print()
     joao.move(value)
