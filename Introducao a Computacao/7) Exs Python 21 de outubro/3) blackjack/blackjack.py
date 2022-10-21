@@ -73,14 +73,18 @@ while flag:
     suit_player.remove(player_card1)
     player_card2 = suit_player[randint(0, len(suit_player))]
     suit_player.remove(player_card2)
+    player.add_cards(player_card1, player_card2)
 
     suit_dealer = suits[randint(0, 3)]
     dealer_card1 = suit_player[randint(0, len(suit_player))]
     suit_dealer.remove(dealer_card1)
     dealer_card2 = suit_player[randint(0, len(suit_player))]
     suit_dealer.remove(dealer_card2)
+    dealer.add_cards(dealer_card1, dealer_card2)
 
-    print()
+
+    print("\nGETTING DEALER AND PLAYER CARDS\n")
+
     # prints the available cards
     for i in range(0, len(suits)):
         print(f"Suit {i}: [", end=" ")
@@ -89,12 +93,14 @@ while flag:
         print("]")
 
     print()
-    print(f"player card: {player_card1.name}")
-    print(f"player card: {player_card2.name}")
-    print(f"dealer card: {dealer_card2.name}")
-    print(f"dealer card: {dealer_card2.name}")
+    print(f"player card1: {player_card1.name}")
+    print(f"player card2: {player_card2.name}")
+    print(f"player: {player.totAmount}")
+    print("-"*20)
+    print(f"dealer card1: {dealer_card2.name}")
+    print(f"dealer card2: {dealer_card2.name}")
+    print(f"dealer: {dealer.totAmount}")
     print()
-
 
 
     while True:
