@@ -85,6 +85,7 @@ while flag:
 
     print("\nGETTING DEALER AND PLAYER CARDS\n")
 
+
     # prints the available cards
     for i in range(0, len(suits)):
         print(f"Suit {i}: [", end=" ")
