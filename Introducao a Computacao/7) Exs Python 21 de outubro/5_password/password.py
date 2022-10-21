@@ -29,6 +29,7 @@ class Password:
             print("All Good!")
         else:
             print("something went wrong\n\nstatus")
+            print(f"has_lower_case: {self.has_lower_case}")
             print(f"has_upper_case: {self.has_upper_case}")
             print(f"has_number: {self.has_number}")
             print(f"has_special_char: {self.has_special_char}")
