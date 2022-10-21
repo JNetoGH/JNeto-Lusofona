@@ -9,6 +9,8 @@ ang = 0
 
 
 while True:  # Main loop--
+    pygame.time.Clock().tick(15)
+
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()
