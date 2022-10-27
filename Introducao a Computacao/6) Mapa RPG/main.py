@@ -4,7 +4,7 @@ map = [["a", "b", "c"],
 
 
 def print_map():
-    print("MAP", end="")
+    print("MAP (Collect G, C, I in this order)", end="")
     for i in range(0, len(map)):
         print("\n|", end="")
         for j in range(0, len(map[0])):
