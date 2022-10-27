@@ -21,6 +21,8 @@ class Player:
 
     def __init__(self, initial_pos: list[int]):
         self.pos: list[int] = initial_pos
+        self.pointsCollected: list = []
+        self.won = False
         print("initial ", end="")
         self.print_pos_status()
 
@@ -42,6 +44,8 @@ class Player:
             self.pos[Axis.VERTICAL] -= 1
             is_code_valid = True
 
+        self.update_collectable_winning_condition()
+
         if not is_code_valid:
             print(f"ERROR: \"{code}\" (passes a boundary or is not valid)")
         self.print_pos_status()
@@ -49,15 +53,36 @@ class Player:
     def print_pos_status(self):
         print("pos: " + map[self.pos[Axis.VERTICAL]][self.pos[Axis.HORIZONTAL]])
         print(f"current index: [{self.pos[Axis.VERTICAL]}][{self.pos[Axis.HORIZONTAL]}]\n")
+        str = ""
+        for collected in self.pointsCollected:
+            str = str + f", {collected}"
+        print(f"collected: {str}")
+
+    def is_there_any_in_collected(self, string:str) -> bool:
+        for i in range(0, len(self.pointsCollected)):
+            if self.pointsCollected[i] == string:
+                return True
+        return False
+
+    def update_collectable_winning_condition(self):
+        if self.pos[Axis.VERTICAL] == 2 and self.pos[Axis.HORIZONTAL] == 0 and (not self.is_there_any_in_collected("G")):
+            self.pointsCollected.append("G")
+        elif self.pos[Axis.VERTICAL] == 0 and self.pos[Axis.HORIZONTAL] == 2 and (not self.is_there_any_in_collected("C")) and self.is_there_any_in_collected("G"):
+            self.pointsCollected.append("C")
+        elif self.pos[Axis.VERTICAL] == 2 and self.pos[Axis.HORIZONTAL] == 2 and (not self.is_there_any_in_collected("I")) and self.is_there_any_in_collected("C") and self.is_there_any_in_collected("G"):
+            self.pointsCollected.append("I")
+            self.won = True
 
 
 print("COMMANDS: quit, north, south, east, west\n")
 print_map()
-joao = Player([0, 1])  # x, y
+joao = Player([1, 1])  # x, y initial
 
-while True:
+while not joao.won:
     value = input("choose a direction: ").upper()
     if value == "QUIT":
         break
     print()
     joao.move(value)
+
+print("YOU WIN")
