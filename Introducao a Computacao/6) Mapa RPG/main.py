@@ -3,7 +3,7 @@ map = [["a", "b", "c"],
        ["g", "h", "i"]]
 
 
-def print_map():
+def print_map() -> None:
     print("MAP (Collect G, C, I in this order)", end="")
     for i in range(0, len(map)):
         print("\n|", end="")
@@ -26,7 +26,7 @@ class Player:
         print("initial ", end="")
         self.print_pos_status()
 
-    def move(self, code):
+    def move(self, code) -> None:
         print_map()
         print("You tried to move: " + code)
 
@@ -50,7 +50,7 @@ class Player:
             print(f"ERROR: \"{code}\" (passes a boundary or is not valid)")
         self.print_pos_status()
 
-    def print_pos_status(self):
+    def print_pos_status(self) -> None:
         print("pos: " + map[self.pos[Axis.VERTICAL]][self.pos[Axis.HORIZONTAL]])
         print(f"current index: [{self.pos[Axis.VERTICAL]}][{self.pos[Axis.HORIZONTAL]}]\n")
         str = ""
@@ -64,7 +64,7 @@ class Player:
                 return True
         return False
 
-    def update_collectable_winning_condition(self):
+    def update_collectable_winning_condition(self) -> None:
         if self.pos[Axis.VERTICAL] == 2 and self.pos[Axis.HORIZONTAL] == 0 and (not self.is_there_any_in_collected("G")):
             self.pointsCollected.append("G")
         elif self.pos[Axis.VERTICAL] == 0 and self.pos[Axis.HORIZONTAL] == 2 and (not self.is_there_any_in_collected("C")) and self.is_there_any_in_collected("G"):
