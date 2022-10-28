@@ -11,12 +11,12 @@ def is_even(num: int) -> bool:
     return num % 2 == 0
 
 
-def checkage(num: int):
+def check(num: int):
     n = str(num)
     print(f"is {n} dit sum even: sum = {get_sum_of_digits(n)}  is even = {is_even(get_sum_of_digits(n))}")
 
 
-checkage(128)
-checkage(121)
-checkage(100)
-checkage(00000)
+check(128)
+check(121)
+check(100)
+check(00000)
