@@ -16,7 +16,5 @@ def check(num: int):
     print(f"is {n} dit sum even: sum = {get_sum_of_digits(n)}  is even = {is_even(get_sum_of_digits(n))}")
 
 
-check(128)
-check(121)
-check(100)
-check(00000)
+for i in range(100, 200+1):
+    check(i)
