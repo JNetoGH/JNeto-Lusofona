@@ -1,21 +1,21 @@
 class Calculator:
 
-    def sum(self, num1: float, num2: float):
+    def sum(self, num1: float, num2: float) -> None:
         print(f"{num1} + {num2} = {num1 + num2}")
 
-    def sub(self, num1: float, num2: float):
+    def sub(self, num1: float, num2: float) -> None:
         print(f"{num1} - {num2} = {num1 - num2}")
 
-    def div(self, num1: float, num2: float):
+    def div(self, num1: float, num2: float) -> None:
         try:
             print(f"{num1} / {num2} = {num1 / num2}")
         except ZeroDivisionError:
             print("cannot divide by 0")
 
-    def mult(self, num1: float, num2: float):
+    def mult(self, num1: float, num2: float) -> None:
         print(f"{num1} * {num2} = {num1 * num2}")
 
-    def is_prime(self, num: int):
+    def is_prime(self, num: int) -> None:
         for i in range(2, num):
             if num % i == 0:
                 print(f"{num} is not prime, division found with {i}")

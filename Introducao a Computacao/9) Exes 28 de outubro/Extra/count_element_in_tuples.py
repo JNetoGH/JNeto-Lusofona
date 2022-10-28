@@ -1,4 +1,4 @@
-def elements_int_tuple(t: tuple):
+def elements_int_tuple(t: tuple) -> str:
     tested = []
     msg = ""
     for element in t:

@@ -1,4 +1,4 @@
-def sum_tuples(t: tuple):
+def sum_tuples(t: tuple) -> None:
     s = 0
     for num in t:
         s += num

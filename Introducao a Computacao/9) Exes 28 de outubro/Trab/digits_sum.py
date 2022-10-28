@@ -11,9 +11,9 @@ def is_even(num: int) -> bool:
     return num % 2 == 0
 
 
-def check(num: int):
+def check(num: int) -> None:
     n = str(num)
-    print(f"is {n} dit sum even: sum = {get_sum_of_digits(n)}  is even = {is_even(get_sum_of_digits(n))}")
+    print(f"is {n} digit sum even? sum = {get_sum_of_digits(n)}  is even = {is_even(get_sum_of_digits(n))}")
 
 
 for i in range(100, 200+1):
