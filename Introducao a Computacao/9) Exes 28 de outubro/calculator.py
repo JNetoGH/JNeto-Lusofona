@@ -1,16 +1,19 @@
 class Calculator:
 
-    def calculate(self, op: str, num1: float, num2: float) -> None:
-        if op == "+":
-            print(f"{num1} + {num2} = {num1 + num2}")
-        elif op == "-":
-            print(f"{num1} - {num2} = {num1 - num2}")
-        elif op == "/":
+    def sum(self, num1: float, num2: float):
+        print(f"{num1} + {num2} = {num1 + num2}")
+
+    def sub(self, num1: float, num2: float):
+        print(f"{num1} - {num2} = {num1 - num2}")
+
+    def div(self, num1: float, num2: float):
+        try:
             print(f"{num1} / {num2} = {num1 / num2}")
-        elif op == "*":
-            print(f"{num1} * {num2} = {num1 * num2}")
-        else:
-            print("operation not recognized")
+        except ZeroDivisionError:
+            print("cannot divide by 0")
+
+    def mult(self, num1: float, num2: float):
+        print(f"{num1} * {num2} = {num1 * num2}")
 
     def is_prime(self, num: int):
         for i in range(2, num):
@@ -21,10 +24,11 @@ class Calculator:
 
 
 calculator: Calculator = Calculator()
-calculator.calculate("+", 5, 5)
-calculator.calculate("-", 5, 8)
-calculator.calculate("/", 5, 2)
-calculator.calculate("*", 5, 4.5)
+calculator.sum(5, 5)
+calculator.sub(5, 8)
+calculator.div(5, 2)
+calculator.div(5, 0)
+calculator.mult(5, 4.5)
 print()
 calculator.is_prime(10)
 calculator.is_prime(5)

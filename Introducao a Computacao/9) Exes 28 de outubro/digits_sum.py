@@ -11,10 +11,12 @@ def is_even(num: int) -> bool:
     return num % 2 == 0
 
 
-def print_msg(n: str):
+def chackage(num: int):
+    n = str(num)
     print(f"is {n} dit sum even: sum = {get_sum_of_digits(n)}  is even = {is_even(get_sum_of_digits(n))}")
 
 
-print_msg("128")
-print_msg("100")
-print_msg("00000")
+chackage(128)
+chackage(121)
+chackage(100)
+chackage(00000)
