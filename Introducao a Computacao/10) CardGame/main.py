@@ -28,12 +28,13 @@ class Deck:
         return [self.cards_list[len(self.cards_list)-2], self.cards_list[len(self.cards_list)-1]]
 
 list_of_cards = []
-list_of_cards.append(Card("A", 14))
+
 for i in range(1, 9+1):
     list_of_cards.append(Card(str(i), i))
 list_of_cards.append(Card("J", 11))
 list_of_cards.append(Card("Q", 12))
 list_of_cards.append(Card("K", 13))
+list_of_cards.append(Card("A", 14))
 
 
 d1 = Deck("My Deck:  ", list_of_cards)
