@@ -101,12 +101,15 @@ class Game:
                 self.player_deck = Deck("player", self.get_14_random_cards_from_buying_deck())
                 print("DECKS AFTER BUYING DECK HAS GIVEN PLAYER NEW CARDS")
 
-            if op == "2":
+            elif op == "2":
+
                 input_card_symbol = input("insert card symbol: ")
                 input_card_suit = input("insert card suit: ")
                 is_it_in_player_deck = False
+
                 for card in self.player_deck.cards_list:
                     if card.symbol == input_card_symbol and card.suit == input_card_suit:
+                        os.system('cls' if os.name == 'nt' else 'clear')
                         is_it_in_player_deck = True
                         self.buying_deck.cards_list.append(card)
                         self.player_deck.cards_list.remove(card)
@@ -125,7 +128,7 @@ class Game:
                     print()
 
 
-            if op == "3":
+            elif op == "3":
                 print()
                 print("\nLAST 2 CARDS OF EACH DECK ")
                 print(self.player_deck.get_last_2_cards_as_string())
