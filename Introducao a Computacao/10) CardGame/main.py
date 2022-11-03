@@ -25,7 +25,7 @@ class Deck:
         self.las2Cards = self._get_last_2_cards()
 
     def _get_last_2_cards(self) -> list[Card]:
-        return [self.cards_list[len(self.cards_list)-1], self.cards_list[len(self.cards_list)-2]]
+        return [self.cards_list[len(self.cards_list)-2], self.cards_list[len(self.cards_list)-1]]
 
 list_of_cards = []
 for i in range(1, 9+1):
