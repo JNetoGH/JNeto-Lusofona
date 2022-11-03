@@ -2,12 +2,13 @@ import random
 
 
 class Card:
-    def __init__(self, symbol: str, value: int):
+    def __init__(self, symbol: str, value: int, suit: str):
         self.symbol = symbol
         self.value = value
+        self.suit = suit
 
     def to_string(self):
-        return f"[{self.symbol}]"
+        return f"[{self.symbol}{self.suit}]"
 
 
 class Deck:
@@ -41,13 +42,15 @@ class Deck:
 
 
 list_of_cards = []
+list_of_suits = ["#", "&", "@", "?"]
 
-for i in range(1, 10+1):
-    list_of_cards.append(Card(str(i), i))
-list_of_cards.append(Card("J", 11))
-list_of_cards.append(Card("Q", 12))
-list_of_cards.append(Card("K", 13))
-list_of_cards.append(Card("A", 14))
+for k in range(0, len(list_of_suits)):
+    for i in range(1, 10+1):
+        list_of_cards.append(Card(str(i), i, list_of_suits[k]))
+    list_of_cards.append(Card("J", 11, list_of_suits[k]))
+    list_of_cards.append(Card("Q", 12, list_of_suits[k]))
+    list_of_cards.append(Card("K", 13, list_of_suits[k]))
+    list_of_cards.append(Card("A", 14, list_of_suits[k]))
 
 d1 = Deck("My Deck ", list_of_cards)
 d2 = Deck("Computer", list_of_cards.copy())
