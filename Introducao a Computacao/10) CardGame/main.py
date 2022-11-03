@@ -66,10 +66,10 @@ class Game:
     def __init__(self):
 
         os.system('cls' if os.name == 'nt' else 'clear')
+
         self.buying_deck: Deck = Game._get_a_full_deck()
         print(self.buying_deck.to_string() + "\n")
         self.buying_deck.shuffle_it()
-
         print("SHUFFLE BUYING DECK")
         print(self.buying_deck.to_string() + "\n")
 
@@ -80,14 +80,59 @@ class Game:
         self.player_deck: Deck = Deck("player", self.get_14_random_cards_from_buying_deck())
         self.computer_deck: Deck = Deck("computer", self.get_14_random_cards_from_buying_deck())
 
-        print(self.buying_deck.to_string()+"\n")
-        print(self.computer_deck.to_string_all_blocked()+"\n")
-        print(self.player_deck.to_string() + "\n")
-
-        while True:
-            input("OPTIONS:\n[1:Discard all]\n[2:Discard 1]\n[3:")
 
 
+        while True: # only breacks at play op
+
+            print(self.buying_deck.to_string() + "\n")
+            print(self.computer_deck.to_string_all_blocked() + "\n")
+            print(self.player_deck.to_string() + "\n")
+
+            op = input("OPTIONS:\n[1:Discard all]\n[2:Discard 1]\n[3:Play]\nInput: ")
+
+            if op == "1":
+                os.system('cls' if os.name == 'nt' else 'clear')
+                self.give_14_cards_to_the_buying_deck(self.player_deck)
+                print("BUYING DECK WITH NEW CARDS")
+                print(self.buying_deck.to_string() + "\n")
+                self.buying_deck.shuffle_it()
+                print("SHUFFLE BUYING DECK")
+                print(self.buying_deck.to_string() + "\n")
+                self.player_deck = Deck("player", self.get_14_random_cards_from_buying_deck())
+                print("DECKS AFTER BUYING DECK HAS GIVEN PLAYER NEW CARDS")
+            if op == "2":
+                input_card_symbol = input("insert card symbol: ")
+                input_card_suit = input("insert card suit: ")
+                is_it_in_player_deck = False
+                for card in self.player_deck.cards_list:
+                    if card.symbol == input_card_symbol and card.suit == input_card_suit:
+                        is_it_in_player_deck = True
+                        self.buying_deck.cards_list.append(card)
+                        self.player_deck.cards_list.remove(card)
+                        print("BUYING DECK WITH NEW CARDS")
+                        print(self.buying_deck.to_string() + "\n")
+                        self.buying_deck.shuffle_it()
+                        print("SHUFFLE BUYING DECK")
+                        print(self.buying_deck.to_string() + "\n")
+                        self.player_deck.cards_list.append(self.get_1_random_card_from_buying_deck())
+                        print("DECKS AFTER BUYING DECK HAS GIVEN PLAYER NEW CARDS")
+
+                if not is_it_in_player_deck:
+                    print(f"{input_card_symbol}{input_card_suit} is not in {self.player_deck.name}")
+
+
+            if op == "3":
+                print()
+                print("\nLAST 2 CARDS OF EACH DECK ")
+                print(self.player_deck.get_last_2_cards_as_string())
+                print(self.computer_deck.get_last_2_cards_as_string() + "\n")
+                if self.player_deck.get_sum_of_last_2_cards() > self.computer_deck.get_sum_of_last_2_cards():
+                    print(f"{self.player_deck.name} wins")
+                elif self.player_deck.get_sum_of_last_2_cards() < self.computer_deck.get_sum_of_last_2_cards():
+                    print(f"{self.computer_deck.name} wins")
+                else:
+                    print("it's a draw")
+                break
 
     @staticmethod
     def _get_a_full_deck() -> Deck:
@@ -109,7 +154,16 @@ class Game:
             self.buying_deck.cards_list.remove(self.buying_deck.cards_list[random_index])
         return cards
 
+    def get_1_random_card_from_buying_deck(self) -> Card:
+        random_index = random.randint(0, len(self.buying_deck.cards_list) - 1)
+        card = self.buying_deck.cards_list[random_index]
+        self.buying_deck.cards_list.remove(card)
+        return card
 
+    def give_14_cards_to_the_buying_deck(self, deck: Deck) -> None:
+        for card in deck.cards_list:
+            self.buying_deck.cards_list.append(card)
+            deck.cards_list.remove(card)
 
 
 Game()
