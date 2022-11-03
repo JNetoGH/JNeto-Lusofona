@@ -1,5 +1,6 @@
 import random
 
+
 class Card:
     def __init__(self, symbol: str, value: int):
         self.symbol = symbol
@@ -7,6 +8,7 @@ class Card:
 
     def to_string(self):
         return f"[{self.symbol}]"
+
 
 class Deck:
     def __init__(self, name:str, cards_list: list[Card]):
