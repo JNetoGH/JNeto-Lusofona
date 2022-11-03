@@ -121,6 +121,7 @@ class Game:
                     os.system('cls' if os.name == 'nt' else 'clear')
                     print(f"{input_card_symbol}{input_card_suit} is not in {self.player_deck.name}")
                     input(f"press enter to pick another action")
+                    print()
 
 
             if op == "3":
