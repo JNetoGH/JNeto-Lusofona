@@ -118,7 +118,9 @@ class Game:
                         print("DECKS AFTER BUYING DECK HAS GIVEN PLAYER NEW CARDS")
 
                 if not is_it_in_player_deck:
+                    os.system('cls' if os.name == 'nt' else 'clear')
                     print(f"{input_card_symbol}{input_card_suit} is not in {self.player_deck.name}")
+                    input(f"press enter to pick another action")
 
 
             if op == "3":
