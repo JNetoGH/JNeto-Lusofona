@@ -100,6 +100,7 @@ class Game:
                 print(self.buying_deck.to_string() + "\n")
                 self.player_deck = Deck("player", self.get_14_random_cards_from_buying_deck())
                 print("DECKS AFTER BUYING DECK HAS GIVEN PLAYER NEW CARDS")
+
             if op == "2":
                 input_card_symbol = input("insert card symbol: ")
                 input_card_suit = input("insert card suit: ")
@@ -137,6 +138,10 @@ class Game:
                     print("it's a draw")
                 break
 
+            else:
+                os.system('cls' if os.name == 'nt' else 'clear')
+
+
     @staticmethod
     def _get_a_full_deck() -> Deck:
         buying_cards_list = []
@@ -157,16 +162,23 @@ class Game:
             self.buying_deck.cards_list.remove(self.buying_deck.cards_list[random_index])
         return cards
 
+    def give_14_cards_to_the_buying_deck(self, deck: Deck) -> None:
+        cards = []
+        for i in range(0, 14 - 1):
+            cards.append(deck.cards_list[i])
+        for card in cards:
+            self.buying_deck.cards_list.append(card)
+            deck.cards_list.remove(card)
+
+
+
+
     def get_1_random_card_from_buying_deck(self) -> Card:
         random_index = random.randint(0, len(self.buying_deck.cards_list) - 1)
         card = self.buying_deck.cards_list[random_index]
         self.buying_deck.cards_list.remove(card)
         return card
 
-    def give_14_cards_to_the_buying_deck(self, deck: Deck) -> None:
-        for card in deck.cards_list:
-            self.buying_deck.cards_list.append(card)
-            deck.cards_list.remove(card)
 
 
 Game()
