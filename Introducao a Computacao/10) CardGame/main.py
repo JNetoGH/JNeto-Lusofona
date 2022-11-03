@@ -29,7 +29,7 @@ class Deck:
 
 list_of_cards = []
 
-for i in range(1, 9+1):
+for i in range(1, 10+1):
     list_of_cards.append(Card(str(i), i))
 list_of_cards.append(Card("J", 11))
 list_of_cards.append(Card("Q", 12))
