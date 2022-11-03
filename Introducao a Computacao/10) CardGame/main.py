@@ -31,6 +31,7 @@ class Deck:
         txt = f"{self.name} last 2 cards: "
         for ending_card in self._get_last_2_cards():
             txt += ending_card.to_string() + " "
+        txt += f"| sum = {self.get_sum_of_last_2_cards()}"
         return txt
 
     def get_sum_of_last_2_cards(self) -> int:
@@ -58,5 +59,13 @@ print(d1.to_string())
 print(d2.to_string() + "\n")
 
 print(d1.get_last_2_cards_as_string())
-print(d2.get_last_2_cards_as_string())
+print(d2.get_last_2_cards_as_string() + "\n")
+
+if d1.get_sum_of_last_2_cards() > d2.get_sum_of_last_2_cards():
+    print(f"{d1.name} wins")
+elif d1.get_sum_of_last_2_cards() < d2.get_sum_of_last_2_cards():
+    print(f"{d2.name} wins")
+else:
+    print("it's a draw")
+
 
