@@ -1,3 +1,4 @@
+import os
 import random
 
 
@@ -30,6 +31,17 @@ class Deck:
             counter += 1
         return string
 
+    def to_string_all_blocked(self) -> str:
+        string = f"{self.name}: \n"
+        counter = 0
+        for card in self.cards_list:
+            if counter >= Deck.TOT_CARDS_PER_LINE-1:
+                string += "\n"
+                counter = 0
+            string += "[//]" + " "
+            counter += 1
+        return string
+
     def shuffle_it(self) -> None:
         random.shuffle(self.cards_list)
 
@@ -44,7 +56,7 @@ class Deck:
         return txt
 
     def get_sum_of_last_2_cards(self) -> int:
-        return self.get_sum_of_last_2_cards()[0].value + self.get_last_2_cards_as_string()[1].value
+        return self._get_last_2_cards()[0].value + self._get_last_2_cards()[1].value
 
 
 class Game:
@@ -52,14 +64,30 @@ class Game:
     LIST_OF_SUITS = ["#", "&", "@", "?"]
 
     def __init__(self):
+
+        os.system('cls' if os.name == 'nt' else 'clear')
         self.buying_deck: Deck = Game._get_a_full_deck()
-        print(self.buying_deck.to_string()+ "\n")
+        print(self.buying_deck.to_string() + "\n")
         self.buying_deck.shuffle_it()
 
-        print(self.buying_deck.to_string()+ "\n")
+        print("SHUFFLE BUYING DECK")
+        print(self.buying_deck.to_string() + "\n")
+
+        input("press enter to generate a round")
+        os.system('cls' if os.name == 'nt' else 'clear')
+
+        print("GIVING RANDOM CARDS TO PLAYER AND COMPUTER\n")
         self.player_deck: Deck = Deck("player", self.get_14_random_cards_from_buying_deck())
-        print(self.player_deck.to_string())
-        #self.computer_deck = computer_deck
+        self.computer_deck: Deck = Deck("computer", self.get_14_random_cards_from_buying_deck())
+
+        print(self.buying_deck.to_string()+"\n")
+        print(self.computer_deck.to_string_all_blocked()+"\n")
+        print(self.player_deck.to_string() + "\n")
+
+        while True:
+            input("OPTIONS:\n[1:Discard all]\n[2:Discard 1]\n[3:")
+
+
 
     @staticmethod
     def _get_a_full_deck() -> Deck:
@@ -75,8 +103,10 @@ class Game:
 
     def get_14_random_cards_from_buying_deck(self) -> list[Card]:
         cards = []
-        for i in range(0, 14):
-            cards.append(self.buying_deck.cards_list[random.randint(0, len(self.buying_deck.cards_list)-1)])
+        for i in range(0, 14-1):
+            random_index = random.randint(0, len(self.buying_deck.cards_list)-1)
+            cards.append(self.buying_deck.cards_list[random_index])
+            self.buying_deck.cards_list.remove(self.buying_deck.cards_list[random_index])
         return cards
 
 
