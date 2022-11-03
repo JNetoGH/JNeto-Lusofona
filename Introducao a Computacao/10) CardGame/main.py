@@ -37,8 +37,8 @@ list_of_cards.append(Card("K", 13))
 list_of_cards.append(Card("A", 14))
 
 
-d1 = Deck("My Deck:  ", list_of_cards)
-d2 = Deck("Computer: ", list_of_cards.copy())
+d1 = Deck("My Deck  ", list_of_cards)
+d2 = Deck("Computer ", list_of_cards.copy())
 
 print(d1.to_string())
 print(d2.to_string())
