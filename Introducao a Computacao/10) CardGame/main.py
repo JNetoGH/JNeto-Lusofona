@@ -13,12 +13,11 @@ class Card:
 
 class Deck:
 
-    TOT_CARDS_PER_LINE = 15
+    TOT_CARDS_PER_LINE = 14
 
-    def __init__(self, name:str, cards_list: list[Card]):
+    def __init__(self, name: str, cards_list: list[Card]):
         self.cards_list = cards_list
         self.name = name
-        self.las2Cards = self._get_last_2_cards()
 
     def to_string(self) -> str:
         string = f"{self.name}: \n"
@@ -33,7 +32,6 @@ class Deck:
 
     def shuffle_it(self) -> None:
         random.shuffle(self.cards_list)
-        self.las2Cards = self._get_last_2_cards()
 
     def _get_last_2_cards(self) -> list[Card]:
         return [self.cards_list[len(self.cards_list)-2], self.cards_list[len(self.cards_list)-1]]
@@ -46,42 +44,71 @@ class Deck:
         return txt
 
     def get_sum_of_last_2_cards(self) -> int:
-        return self.las2Cards[0].value + self.las2Cards[1].value
+        return self.get_sum_of_last_2_cards()[0].value + self.get_last_2_cards_as_string()[1].value
 
 
+class Game:
+
+    LIST_OF_SUITS = ["#", "&", "@", "?"]
+
+    def __init__(self):
+        self.buying_deck: Deck = Game._get_a_full_deck()
+        print(self.buying_deck.to_string()+ "\n")
+        self.buying_deck.shuffle_it()
+
+        print(self.buying_deck.to_string()+ "\n")
+        self.player_deck: Deck = Deck("player", self.get_14_random_cards_from_buying_deck())
+        print(self.player_deck.to_string())
+        #self.computer_deck = computer_deck
+
+    @staticmethod
+    def _get_a_full_deck() -> Deck:
+        buying_cards_list = []
+        for k in range(0, len(Game.LIST_OF_SUITS)):
+            for i in range(2, 10 + 1):
+                buying_cards_list.append(Card(str(i), i, Game.LIST_OF_SUITS[k]))
+            buying_cards_list.append(Card("J", 11, Game.LIST_OF_SUITS[k]))
+            buying_cards_list.append(Card("Q", 12, Game.LIST_OF_SUITS[k]))
+            buying_cards_list.append(Card("K", 13, Game.LIST_OF_SUITS[k]))
+            buying_cards_list.append(Card("A", 14, Game.LIST_OF_SUITS[k]))
+        return Deck("Buying Deck", buying_cards_list)
+
+    def get_14_random_cards_from_buying_deck(self) -> list[Card]:
+        cards = []
+        for i in range(0, 14):
+            cards.append(self.buying_deck.cards_list[random.randint(0, len(self.buying_deck.cards_list)-1)])
+        return cards
+
+
+
+
+Game()
+
+
+"""
 list_of_cards = []
-list_of_suits = ["#", "&", "@", "?"]
-
-for k in range(0, len(list_of_suits)):
-    for i in range(1, 10+1):
-        list_of_cards.append(Card(str(i), i, list_of_suits[k]))
-    list_of_cards.append(Card("J", 11, list_of_suits[k]))
-    list_of_cards.append(Card("Q", 12, list_of_suits[k]))
-    list_of_cards.append(Card("K", 13, list_of_suits[k]))
-    list_of_cards.append(Card("A", 14, list_of_suits[k]))
-
-d1 = Deck("My Deck", list_of_cards)
-d2 = Deck("Computer", list_of_cards.copy())
+deck1 = Deck("My Deck", list_of_cards)
+deck2 = Deck("Computer", list_of_cards.copy())
 
 print("\nINITIAL DECKS ")
-print(d1.to_string())
-print(d2.to_string() + "\n")
+print(deck1.to_string())
+print(deck2.to_string() + "\n")
 
-d1.shuffle_it()
-d2.shuffle_it()
+deck1.shuffle_it()
+deck2.shuffle_it()
 print("\nSHUFFLE DECKS ")
-print(d1.to_string())
-print(d2.to_string() + "\n")
+print(deck1.to_string())
+print(deck2.to_string() + "\n")
 
 print("\nLAST 2 CARDS OF EACH DECK ")
-print(d1.get_last_2_cards_as_string())
-print(d2.get_last_2_cards_as_string() + "\n")
+print(deck1.get_last_2_cards_as_string())
+print(deck2.get_last_2_cards_as_string() + "\n")
 
-if d1.get_sum_of_last_2_cards() > d2.get_sum_of_last_2_cards():
-    print(f"{d1.name} wins")
-elif d1.get_sum_of_last_2_cards() < d2.get_sum_of_last_2_cards():
-    print(f"{d2.name} wins")
+if deck1.get_sum_of_last_2_cards() > deck2.get_sum_of_last_2_cards():
+    print(f"{deck1.name} wins")
+elif deck1.get_sum_of_last_2_cards() < deck2.get_sum_of_last_2_cards():
+    print(f"{deck2.name} wins")
 else:
     print("it's a draw")
 
-
+"""
