@@ -12,15 +12,23 @@ class Card:
 
 
 class Deck:
+
+    TOT_CARDS_PER_LINE = 15
+
     def __init__(self, name:str, cards_list: list[Card]):
         self.cards_list = cards_list
         self.name = name
         self.las2Cards = self._get_last_2_cards()
 
     def to_string(self) -> str:
-        string = f"{self.name}: "
+        string = f"{self.name}: \n"
+        counter = 0
         for card in self.cards_list:
+            if counter >= Deck.TOT_CARDS_PER_LINE-1:
+                string += "\n"
+                counter = 0
             string += card.to_string() + " "
+            counter += 1
         return string
 
     def shuffle_it(self) -> None:
@@ -52,17 +60,20 @@ for k in range(0, len(list_of_suits)):
     list_of_cards.append(Card("K", 13, list_of_suits[k]))
     list_of_cards.append(Card("A", 14, list_of_suits[k]))
 
-d1 = Deck("My Deck ", list_of_cards)
+d1 = Deck("My Deck", list_of_cards)
 d2 = Deck("Computer", list_of_cards.copy())
 
+print("\nINITIAL DECKS ")
 print(d1.to_string())
 print(d2.to_string() + "\n")
 
 d1.shuffle_it()
 d2.shuffle_it()
+print("\nSHUFFLE DECKS ")
 print(d1.to_string())
 print(d2.to_string() + "\n")
 
+print("\nLAST 2 CARDS OF EACH DECK ")
 print(d1.get_last_2_cards_as_string())
 print(d2.get_last_2_cards_as_string() + "\n")
 
