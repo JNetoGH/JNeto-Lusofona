@@ -1,15 +1,25 @@
+import enum
 import math
+
+
+class ViewMode(enum.Enum):
+    VIEW_2D = 1,
+    VIEW_3D = 0
+
 
 # GAME SETTINGS
 SCREEN_WIDTH, SCREEN_HEIGHT = 1600, 900
 
 RES = (SCREEN_WIDTH, SCREEN_HEIGHT)
-FPS = 0
+FPS_TARGET = 0  # 0 is unlocked
 
+# PLAYER RELATED
 PLAYER_INITIAL_POS = 1.5, 5  # mini_map
 PLAYER_ANGLE = 0
 PLAYER_SPEED = 0.004
 PLAYER_ROT_SPEED = 0.002
+# used at to set the camera height
+PLAYER_SIZE_SCALE = 60
 
 # RAY CASTING
 FOV = math.pi / 3
@@ -17,8 +27,7 @@ HALF_FOV = FOV / 2
 NUM_RAYS = SCREEN_WIDTH // 2
 HALF_NUM_RAYS = NUM_RAYS // 2
 DELTA_ANGLE = FOV / NUM_RAYS
-# draw distance
-MAX_DEPTH = 20
+MAX_DEPTH = 20 # same as draw distance
 
 # RAY CASTING 3D PROJECTION
 HALF_WIDTH = SCREEN_WIDTH // 2

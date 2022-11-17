@@ -2,6 +2,7 @@ import settings
 import pygame as pg
 import math
 
+
 class Player:
     def __init__(self, game):
         self.game = game
@@ -32,11 +33,8 @@ class Player:
             dx += -speed_sin
             dy += speed_cos
 
-        # applying increments/decrements to the coordinates if there is no wall adding the increment
-        if self.no_walls_at(int(self.x + dx), int(self.y)):
-            self.x += dx
-        if self.no_walls_at(int(self.x), int(self.y + dy)):
-            self.y += dy
+        # basically moves the player if there is no wall collision using the deltas x and y
+        self.check_wall_collisons_and_move_player(dx, dy)
 
         # increments/decrements the rot angle using arrow < > keys, basically rotates player
         if keys[pg.K_LEFT]:
@@ -45,6 +43,15 @@ class Player:
             self.angle += settings.PLAYER_ROT_SPEED * self.game.delta_time
         # makes sure the angle remains in 2pi
         self.angle %= math.tau
+
+    def check_wall_collisons_and_move_player(self, dx, dy):
+        # player size
+        scale = settings.PLAYER_SIZE_SCALE / self.game.delta_time
+        # applying increments/decrements to the coordinates if there is no wall adding the increment
+        if self.no_walls_at(int(self.x + dx * scale), int(self.y)):
+            self.x += dx
+        if self.no_walls_at(int(self.x), int(self.y + dy * scale)):
+            self.y += dy
 
     def no_walls_at(self, x, y):
         return (x, y) not in self.game.map.world_map_not_null_obj_coordinates

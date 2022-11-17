@@ -1,30 +1,32 @@
 import pygame as pg
 import sys
 import settings
-import map
-import player
-import raycasting
-import object_rederer
+from map import Map
+from player import Player
+from raycasting import RayCasting
+from object_rederer import ObjectRenderer
 
 class Game:
+
     def __init__(self):
         pg.init()
+        self.view_mode = settings.ViewMode.VIEW_2D  # pseudo-3d or 2d render
         self.screen = pg.display.set_mode(settings.RES)
         self.clock = pg.time.Clock()
         self.delta_time = 1
         self.new_game()
 
     def new_game(self):
-        self.map = map.Map(self)
-        self.player = player.Player(self)
-        self.object_renderer = object_rederer.ObjectRenderer(self)
-        self.raycasting = raycasting.RayCasting(self)
+        self.map = Map(self)
+        self.player = Player(self)
+        self.object_renderer = ObjectRenderer(self)
+        self.raycasting = RayCasting(self)
 
     def update(self):
         self.player.update()
         self.raycasting.update()
         pg.display.flip()
-        self.delta_time = self.clock.tick(settings.FPS)
+        self.delta_time = self.clock.tick(settings.FPS_TARGET)
         # frame caption shows the game frame production per second
         pg.display.set_caption(f"FPS: {self.clock.get_fps():.1f}")
 
@@ -32,12 +34,13 @@ class Game:
         # clears screen
         self.screen.fill("black")
 
-        # renders the game with 3d Projection
-        self.object_renderer.draw()
-
         # renders the game 2D pre 3D projection
-        # self.map.draw()
-        # self.player.draw()
+        if self.view_mode == settings.ViewMode.VIEW_2D:
+            self.map.draw()
+            self.player.draw()
+        # renders the game with 3d Projection
+        elif self.view_mode == settings.ViewMode.VIEW_3D:
+            self.object_renderer.draw()
 
     def check_events(self):
         for event in pg.event.get():
