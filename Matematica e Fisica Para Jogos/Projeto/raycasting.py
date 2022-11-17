@@ -32,7 +32,10 @@ class RayCasting:
     def ray_cast(self):
         self.ray_casting_result = []
         texture_vert, texture_hor = 1, 1
+
+        # player x and y
         ox, oy = self.game.player.pos
+        # player tile map x and y
         x_map, y_map = self.game.player.tile_map_pos
 
         ray_angle = self.game.player.angle - settings.HALF_FOV + 0.0001

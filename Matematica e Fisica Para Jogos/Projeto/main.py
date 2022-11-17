@@ -10,6 +10,7 @@ class Game:
 
     def __init__(self):
         pg.init()
+        pg.mouse.set_visible(False) # mouse visibility is set to false
         self.view_mode = settings.ViewMode.VIEW_3D  # pseudo-3d or 2d render
         self.screen = pg.display.set_mode(settings.RES)
         self.clock = pg.time.Clock()
@@ -45,7 +46,7 @@ class Game:
 
     def check_events(self):
         for event in pg.event.get():
-            if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.KEYDOWN):
+            if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
                 pg.quit()
                 sys.exit()
             if event.type == pg.KEYDOWN and event.key == pg.K_p:

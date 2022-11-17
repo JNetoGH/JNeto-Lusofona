@@ -9,7 +9,7 @@ class Player:
         self.x, self.y = settings.PLAYER_INITIAL_POS
         self.angle = settings.PLAYER_ANGLE
 
-    def move_and_rotate(self):
+    def move(self):
         # increments in x-axis and y-axis
         dx, dy = 0, 0
 
@@ -34,17 +34,9 @@ class Player:
             dy += speed_cos
 
         # basically moves the player if there is no wall collision using the deltas x and y
-        self.check_wall_collisons_and_move_player(dx, dy)
+        self.check_wall_collisions_and_move_player(dx, dy)
 
-        # increments/decrements the rot angle using arrow < > keys, basically rotates player
-        if keys[pg.K_LEFT]:
-            self.angle -= settings.PLAYER_ROT_SPEED * self.game.delta_time
-        if keys[pg.K_RIGHT]:
-            self.angle += settings.PLAYER_ROT_SPEED * self.game.delta_time
-        # makes sure the angle remains in 2pi
-        self.angle %= math.tau
-
-    def check_wall_collisons_and_move_player(self, dx, dy):
+    def check_wall_collisions_and_move_player(self, dx, dy):
         # player size
         scale = settings.PLAYER_SIZE_SCALE / self.game.delta_time
         # applying increments/decrements to the coordinates if there is no wall adding the increment
@@ -56,6 +48,26 @@ class Player:
     def no_walls_at(self, x, y):
         return (x, y) not in self.game.map.world_map_not_null_obj_coordinates
 
+    # for 3D representation
+    def mouse_rotation(self):
+        mx, my = pg.mouse.get_pos()
+        # available area for mouse inputs
+        if mx < settings.MOUSE_BORDER_LEFT or mx > settings.MOUSE_BORDER_RIGHT:
+            pg.mouse.set_pos([settings.HALF_WIDTH, settings.HALF_HEIGHT])
+        self.rel = pg.mouse.get_rel()[0]
+        self.rel = max(-settings.MOUSE_MAX_RELATIVE_MOV, min(settings.MOUSE_MAX_RELATIVE_MOV, self.rel))
+        self.angle += self.rel * settings.MOUSE_SENSITIVITY * self.game.delta_time
+
+    # for 2D representation, the keys will be used
+    def keys_rotation(self):
+        keys = pg.key.get_pressed()
+        # increments/decrements the rot angle using  keys, basically rotates player
+        if self.game.view_mode == settings.ViewMode.VIEW_2D:
+            if keys[pg.K_q]:
+                self.angle -= settings.PLAYER_ROT_SPEED * self.game.delta_time
+            if keys[pg.K_e]:
+                self.angle += settings.PLAYER_ROT_SPEED * self.game.delta_time
+
     def draw(self):
         # the line that represents where the player is looking at, represents the angle line
         pg.draw.line(self.game.screen, "blue", (self.x * 100, self.y * 100),
@@ -66,7 +78,14 @@ class Player:
         pg.draw.circle(self.game.screen, "green", (self.x * 100, self.y * 100), radius=15)
 
     def update(self):
-        self.move_and_rotate()
+        self.move()
+        if self.game.view_mode == settings.ViewMode.VIEW_3D:
+            self.mouse_rotation()
+        elif self.game.view_mode == settings.ViewMode.VIEW_2D:
+            self.keys_rotation()
+
+        # makes sure the angle remains in 2pi (360 degress)
+        self.angle %= math.tau
 
     @property
     def pos(self):
