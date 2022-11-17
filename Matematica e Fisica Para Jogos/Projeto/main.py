@@ -4,6 +4,7 @@ import settings
 import map
 import player
 import raycasting
+import object_rederer
 
 class Game:
     def __init__(self):
@@ -16,6 +17,7 @@ class Game:
     def new_game(self):
         self.map = map.Map(self)
         self.player = player.Player(self)
+        self.object_renderer = object_rederer.ObjectRenderer(self)
         self.raycasting = raycasting.RayCasting(self)
 
     def update(self):
@@ -29,9 +31,13 @@ class Game:
     def draw(self):
         # clears screen
         self.screen.fill("black")
-        # render the game
-        #self.map.draw()
-        #self.player.draw()
+
+        # renders the game with 3d Projection
+        self.object_renderer.draw()
+
+        # renders the game 2D pre 3D projection
+        # self.map.draw()
+        # self.player.draw()
 
     def check_events(self):
         for event in pg.event.get():

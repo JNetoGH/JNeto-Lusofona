@@ -51,7 +51,10 @@ class Player:
 
     def draw(self):
         # the line that represents where the player is looking at, represents the angle line
-        #pg.draw.line(self.game.screen, "yellow", (self.x * 100, self.y * 100), (self.x * 100 + settings.WIDTH * math.cos(self.angle), self.y * 100 + settings.WIDTH * math.sin(self.angle)), 2)
+        pg.draw.line(self.game.screen, "blue", (self.x * 100, self.y * 100),
+                     (self.x * 100 + settings.SCREEN_WIDTH * math.cos(self.angle),
+                      self.y * 100 + settings.SCREEN_WIDTH * math.sin(self.angle)),
+                     2)
         # represents the player as a ball
         pg.draw.circle(self.game.screen, "green", (self.x * 100, self.y * 100), radius=15)
 
