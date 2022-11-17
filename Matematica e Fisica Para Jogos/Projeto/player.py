@@ -53,7 +53,7 @@ class Player:
         mx, my = pg.mouse.get_pos()
         # available area for mouse inputs
         if mx < settings.MOUSE_BORDER_LEFT or mx > settings.MOUSE_BORDER_RIGHT:
-            pg.mouse.set_pos([settings.HALF_WIDTH, settings.HALF_HEIGHT])
+            pg.mouse.set_pos([settings.SCREEN_HALF_WIDTH, settings.SCREEN_HALF_HEIGHT])
         self.rel = pg.mouse.get_rel()[0]
         self.rel = max(-settings.MOUSE_MAX_RELATIVE_MOV, min(settings.MOUSE_MAX_RELATIVE_MOV, self.rel))
         self.angle += self.rel * settings.MOUSE_SENSITIVITY * self.game.delta_time
@@ -84,7 +84,7 @@ class Player:
         elif self.game.view_mode == settings.ViewMode.VIEW_2D:
             self.keys_rotation()
 
-        # makes sure the angle remains in 2pi (360 degress)
+        # makes sure the angle remains in 2pi (1 trig. circle)
         self.angle %= math.tau
 
     @property

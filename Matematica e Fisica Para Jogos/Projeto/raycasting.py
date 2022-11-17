@@ -19,7 +19,7 @@ class RayCasting:
             if proj_height < settings.SCREEN_HEIGHT:
                 wall_column = self.textures[texture].subsurface(offset * (settings.TEXTURE_SIZE - settings.SCALE), 0, settings.SCALE, settings.TEXTURE_SIZE)
                 wall_column = pg.transform.scale(wall_column, (settings.SCALE, proj_height))
-                wall_pos = (ray * settings.SCALE, settings.HALF_HEIGHT - proj_height // 2)
+                wall_pos = (ray * settings.SCALE, settings.SCREEN_HALF_HEIGHT - proj_height // 2)
             else:
                 texture_height = settings.TEXTURE_SIZE * settings.SCREEN_HEIGHT / proj_height
                 wall_column = self.textures[texture].subsurface(

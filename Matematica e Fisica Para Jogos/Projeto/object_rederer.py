@@ -10,12 +10,26 @@ class ObjectRenderer:
         # holds a dictionary with all textures
         self.wall_textures = self.load_wall_textures()
 
+        #sky
+        self.sky_image = self.get_texture("resources/textures/sky.png", (
+            settings.SCREEN_WIDTH, settings.SCREEN_HALF_HEIGHT))
+        self.sky_offset = 0
+
     def draw(self):
+        self.draw_back_ground()
         self.render_game_objects()
+
+    def draw_back_ground(self):
+        #sky: drwa 2 images and conects them using the player mouse relative pos
+        self.sky_offset = (self.sky_offset + 4.5 * self.game.player.rel) % settings.SCREEN_WIDTH
+        self.screen.blit(self.sky_image, (-self.sky_offset, 0))
+        self.screen.blit(self.sky_image, (-self.sky_offset + settings.SCREEN_WIDTH, 0))
+        #floor: just a rectangle
+        pg.draw.rect(self.screen, settings.FLOOR_COLOR, (0, settings.SCREEN_HALF_HEIGHT, settings.SCREEN_WIDTH, settings.SCREEN_HEIGHT))
 
     # draws the resulting texture of the objects to render list
     def render_game_objects(self):
-        list_objects = self.game.raycasting.objects_to_render
+        list_objects = sorted(self.game.raycasting.objects_to_render, key=lambda t: t[0], reverse=True)
         for depth, image, pos in list_objects:
             self.screen.blit(image, pos)
 
