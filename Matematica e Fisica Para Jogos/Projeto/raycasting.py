@@ -105,7 +105,7 @@ class RayCasting:
             """
 
             if self.game.view_mode == settings.ViewMode.VIEW_2D:
-                # projection "FOV" in 2D
+                # projection "FOV" in 2D, draws each ray that composes the fov
                 pg.draw.line(self.game.screen, "yellow", (100 * ox, 100 * oy),  (100 * ox + 100 * depth * cos_a, 100 * oy + 100 * depth * sin_a), 2)
 
             # updates the ray angle to the next

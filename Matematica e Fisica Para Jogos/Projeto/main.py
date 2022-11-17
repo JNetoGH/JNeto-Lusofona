@@ -10,7 +10,7 @@ class Game:
 
     def __init__(self):
         pg.init()
-        self.view_mode = settings.ViewMode.VIEW_2D  # pseudo-3d or 2d render
+        self.view_mode = settings.ViewMode.VIEW_3D  # pseudo-3d or 2d render
         self.screen = pg.display.set_mode(settings.RES)
         self.clock = pg.time.Clock()
         self.delta_time = 1
@@ -25,6 +25,7 @@ class Game:
     def update(self):
         self.player.update()
         self.raycasting.update()
+
         pg.display.flip()
         self.delta_time = self.clock.tick(settings.FPS_TARGET)
         # frame caption shows the game frame production per second
@@ -47,6 +48,11 @@ class Game:
             if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.KEYDOWN):
                 pg.quit()
                 sys.exit()
+            if event.type == pg.KEYDOWN and event.key == pg.K_p:
+                if self.view_mode == settings.ViewMode.VIEW_2D:
+                    self.view_mode = settings.ViewMode.VIEW_3D
+                elif self.view_mode == settings.ViewMode.VIEW_3D:
+                    self.view_mode = settings.ViewMode.VIEW_2D
 
     # Holds the game loop
     def run(self):
