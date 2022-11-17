@@ -18,7 +18,7 @@ PLAYER_INITIAL_POS = 1.5, 5  # mini_map
 PLAYER_ANGLE = 0
 PLAYER_SPEED = 0.004
 PLAYER_ROT_SPEED = 0.002
-# used at to set the camera height
+# used at to set the player size in collisions
 PLAYER_SIZE_SCALE = 60
 
 # RAY CASTING
