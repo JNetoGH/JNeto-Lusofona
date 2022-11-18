@@ -19,7 +19,6 @@ class Game:
         self.delta_time = 1
         self.new_game()
 
-
     def new_game(self):
         self.map = Map(self)
         self.player = Player(self)
@@ -67,6 +66,7 @@ class Game:
             self.check_events()
             self.update()
             self.draw()
+
 
 if __name__ == "__main__":
     game = Game()
