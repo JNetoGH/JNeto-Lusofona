@@ -14,8 +14,7 @@ class Renderer:
         self.wall_textures = self.load_wall_textures()
 
         #sky
-        self.sky_image = self.get_texture("resources/wall_textures/sky.png", (
-        settings.SCREEN_WIDTH, settings.SCREEN_HALF_HEIGHT))
+        self.sky_image = self.get_texture("resources/wall_textures/sky.png", (settings.SCREEN_WIDTH, settings.SCREEN_HALF_HEIGHT))
         self.sky_offset = 0
 
     def draw(self):

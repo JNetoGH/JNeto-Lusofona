@@ -1,12 +1,13 @@
 import os
 import pygame as pg
 import sys
-import settings.settings as settings
+from settings import settings
 from scripts.map import Map
 from scripts.player import Player
 from scripts.pseudo_3d_engine.raycasting import RayCasting
 from scripts.renderer import Renderer
 from scripts.game_object_management.game_objects_classes import StaticSpriteGameObject, AnimatedSpriteGameObject
+
 
 class Game:
 
