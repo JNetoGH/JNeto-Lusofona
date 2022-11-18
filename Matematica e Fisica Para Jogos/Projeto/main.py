@@ -11,11 +11,6 @@ from scripts.game_object_management.game_objects_classes import StaticSpriteGame
 class Game:
 
     def __init__(self):
-        path = os.getcwd() # get current directory
-        parent = os.path.dirname(path) # parent directory
-        print("Directory", parent)
-        self.game_folder_path = path
-
         pg.init()
         pg.mouse.set_visible(False) # mouse visibility is set to false
         self.view_mode = settings.ViewMode.VIEW_3D  # pseudo-3d or 2d render
