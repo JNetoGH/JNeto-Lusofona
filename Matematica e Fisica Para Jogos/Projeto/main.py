@@ -3,9 +3,9 @@ import sys
 import settings
 from map import Map
 from player import Player
-from raycasting import RayCasting
-from object_rederer import ObjectRenderer
-from sprite_object import SpriteObject
+from scripts.pseudo_3d_engine.raycasting import RayCasting
+from rederer import Renderer
+from scripts.game_object_management.game_objects_classes import StaticSpriteGameObject, AnimatedSpriteGameObject
 
 class Game:
 
@@ -21,15 +21,16 @@ class Game:
     def new_game(self):
         self.map = Map(self)
         self.player = Player(self)
-        self.object_renderer = ObjectRenderer(self)
+        self.object_renderer = Renderer(self)
         self.raycasting = RayCasting(self)
-        self.static_sprite = SpriteObject(self)
+        self.static_sprite = StaticSpriteGameObject(self)
+        self.animeted_sprite = AnimatedSpriteGameObject(self)
 
     def update(self):
         self.player.update()
         self.raycasting.update()
         self.static_sprite.update()
-
+        self.animeted_sprite.update()
         pg.display.flip()
         self.delta_time = self.clock.tick(settings.FPS_TARGET)
         # frame caption shows the game frame production per second

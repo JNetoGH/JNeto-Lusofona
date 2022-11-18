@@ -101,7 +101,7 @@ class RayCasting:
             self.ray_casting_result.append((depth, proj_height, texture, offset))
 
             """
-            # draw walls: the white version with no textures , the color calculates a depth shadow to the wall
+            # draw walls: the white version with no wall_textures , the color calculates a depth shadow to the wall
             color = [255 / (1 + depth ** 5 * 0.00002)] * 3
             pg.draw.rect(self.game.screen, color,
                          (ray * settings.SCALE, settings.HALF_HEIGHT - proj_height // 2, settings.SCALE, proj_height))
