@@ -4,7 +4,7 @@ import settings
 from map import Map
 from player import Player
 from scripts.pseudo_3d_engine.raycasting import RayCasting
-from rederer import Renderer
+from renderer import Renderer
 from scripts.game_object_management.game_objects_classes import StaticSpriteGameObject, AnimatedSpriteGameObject
 
 class Game:

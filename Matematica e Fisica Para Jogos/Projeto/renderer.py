@@ -1,6 +1,6 @@
 import pygame as pg
 import settings
-
+import os
 
 # RENDERS ALL OBJS AND THEIR TEXTURES, IT DOESN'T MAKE AND 2D TO 3D CONVERSION LIKE THE RAY CASTER, ONLY RENDERS
 # It renders the sky, floor, walls and sprite objects, if there are more things they will be rendered by the Renderer as well
