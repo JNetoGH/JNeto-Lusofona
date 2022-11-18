@@ -1,7 +1,7 @@
 import math
 import os
 from collections import deque
-import settings
+from settings import settings
 import pygame as pg
 
 

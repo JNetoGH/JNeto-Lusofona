@@ -1,6 +1,6 @@
 import pygame as pg
-import settings
-import os
+from settings import settings
+
 
 # RENDERS ALL OBJS AND THEIR TEXTURES, IT DOESN'T MAKE AND 2D TO 3D CONVERSION LIKE THE RAY CASTER, ONLY RENDERS
 # It renders the sky, floor, walls and sprite objects, if there are more things they will be rendered by the Renderer as well
@@ -14,7 +14,8 @@ class Renderer:
         self.wall_textures = self.load_wall_textures()
 
         #sky
-        self.sky_image = self.get_texture("resources/wall_textures/sky.png", (settings.SCREEN_WIDTH, settings.SCREEN_HALF_HEIGHT))
+        self.sky_image = self.get_texture("resources/wall_textures/sky.png", (
+        settings.SCREEN_WIDTH, settings.SCREEN_HALF_HEIGHT))
         self.sky_offset = 0
 
     def draw(self):
@@ -44,6 +45,7 @@ class Renderer:
     # returns a dictionary in which the texture number is the key and the texture is value
     # at map.py, the numbers refers to what texture might be applied to the walls
     def load_wall_textures(self):
+
         return {
             1: self.get_texture("resources/wall_textures/1.png"),
             2: self.get_texture("resources/wall_textures/2.png"),

@@ -1,15 +1,21 @@
+import os
 import pygame as pg
 import sys
-import settings
-from map import Map
-from player import Player
+import settings.settings as settings
+from scripts.map import Map
+from scripts.player import Player
 from scripts.pseudo_3d_engine.raycasting import RayCasting
-from renderer import Renderer
+from scripts.renderer import Renderer
 from scripts.game_object_management.game_objects_classes import StaticSpriteGameObject, AnimatedSpriteGameObject
 
 class Game:
 
     def __init__(self):
+        path = os.getcwd() # get current directory
+        parent = os.path.dirname(path) # parent directory
+        print("Directory", parent)
+        self.game_folder_path = path
+
         pg.init()
         pg.mouse.set_visible(False) # mouse visibility is set to false
         self.view_mode = settings.ViewMode.VIEW_3D  # pseudo-3d or 2d render
@@ -17,6 +23,7 @@ class Game:
         self.clock = pg.time.Clock()
         self.delta_time = 1
         self.new_game()
+
 
     def new_game(self):
         self.map = Map(self)

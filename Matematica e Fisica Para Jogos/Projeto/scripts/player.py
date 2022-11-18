@@ -1,4 +1,4 @@
-import settings
+import settings.settings as settings
 import pygame as pg
 import math
 
