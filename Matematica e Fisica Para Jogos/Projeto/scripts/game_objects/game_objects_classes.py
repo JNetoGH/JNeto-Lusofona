@@ -70,8 +70,8 @@ class StaticSpriteGameObject:
 
 
 class AnimatedSpriteGameObject(StaticSpriteGameObject):
-    def __init__(self, game, path="resources/sprites/animated_sprites/green_light/0.png",
-                 initial_pos_tile_matrix=(10.5, 4), scale=0.7, height_shift=0.27, animation_time=120):
+    def __init__(self, game, path="scripts/game_objects/default_sprites/animated/nyan.png/0.png",
+                 initial_pos_tile_matrix=(10.5, 5), scale=0.25, height_shift=0.27, animation_time=120):
         super().__init__(game, path, initial_pos_tile_matrix, scale, height_shift)
         self.animation_time = animation_time
         self.path = path.rsplit('/', 1)[0]
