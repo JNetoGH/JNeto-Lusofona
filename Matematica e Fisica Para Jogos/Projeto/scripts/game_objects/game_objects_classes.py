@@ -10,11 +10,11 @@ class StaticSpriteGameObject:
     # scale is the same as size
     # height_shift is the same o position in y, the bigger the value, the lower it will be placed
     # they must be individually set to each sprite
-    def __init__(self, game, path="resources/sprites/static_sprites/candlebra.png", pos_tile_matrix=(10.5, 3.5),
-                 scale=0.7, height_shift=0.27):
+    def __init__(self, game, path="scripts/game_objects/default_sprites/static/static_test_cat.png",
+                 initial_pos_tile_matrix: list=(10.5, 3.5), scale=0.7, height_shift=0.27):
         self.game = game
         self.player = game.player
-        self.x, self.y = pos_tile_matrix
+        self.x, self.y = initial_pos_tile_matrix
         self.current_image = pg.image.load(path).convert_alpha()
         self.IMAGE_WIDTH = self.current_image.get_width()
         self.IMAGE_HALF_WIDTH = self.current_image.get_width() // 2
@@ -70,9 +70,9 @@ class StaticSpriteGameObject:
 
 
 class AnimatedSpriteGameObject(StaticSpriteGameObject):
-    def __init__(self, game, path="resources/sprites/animated_sprites/green_light/0.png", pos_tile_matrix=(10.5, 4),
-                 scale=0.7, height_shift=0.27, animation_time=120):
-        super().__init__(game, path, pos_tile_matrix, scale, height_shift)
+    def __init__(self, game, path="resources/sprites/animated_sprites/green_light/0.png",
+                 initial_pos_tile_matrix=(10.5, 4), scale=0.7, height_shift=0.27, animation_time=120):
+        super().__init__(game, path, initial_pos_tile_matrix, scale, height_shift)
         self.animation_time = animation_time
         self.path = path.rsplit('/', 1)[0]
         self.images: deque = self.get_images(self.path)

@@ -6,8 +6,11 @@ from scripts.map import Map
 from scripts.player import Player
 from scripts.pseudo_3d_engine.raycasting import RayCasting
 from scripts.renderer import Renderer
-from scripts.game_object_management.game_objects_classes import StaticSpriteGameObject, AnimatedSpriteGameObject
+from scripts.game_objects.game_objects_classes import StaticSpriteGameObject, AnimatedSpriteGameObject
+from scripts.game_objects.game_object_handler import GameObjectHandler
 
+
+# todo paths that are hard coded, sky and walls in renderer, sprite in game_object_handler
 
 class Game:
 
@@ -23,16 +26,24 @@ class Game:
     def new_game(self):
         self.map = Map(self)
         self.player = Player(self)
-        self.object_renderer = Renderer(self)
+        self.renderer = Renderer(self)
         self.raycasting = RayCasting(self)
-        self.static_sprite = StaticSpriteGameObject(self)
-        self.animeted_sprite = AnimatedSpriteGameObject(self)
+
+        # without the handler, each kind of game object must be called unitary
+        # self.object_handler = GameObjectHandler(self)
+        self.static_sprite_gmObj = StaticSpriteGameObject(self)
+        self.animeted_sprite_gmObj = AnimatedSpriteGameObject(self)
+
 
     def update(self):
         self.player.update()
         self.raycasting.update()
-        self.static_sprite.update()
-        self.animeted_sprite.update()
+
+        # without the handler, each kind of game object must be called unitary
+        # self.object_handler.update()
+        self.static_sprite_gmObj.update()
+        self.animeted_sprite_gmObj.update()
+
         pg.display.flip()
         self.delta_time = self.clock.tick(settings.FPS_TARGET)
         # frame caption shows the game frame production per second
@@ -48,7 +59,7 @@ class Game:
             self.player.draw()
         # renders the game with 3d Projection
         elif self.view_mode == settings.ViewMode.VIEW_3D:
-            self.object_renderer.draw()
+            self.renderer.draw()
 
     def check_events(self):
         for event in pg.event.get():
