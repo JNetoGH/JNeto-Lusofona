@@ -1,12 +1,14 @@
 import math
 import os
 from collections import deque
+
+from scripts.game_objects.game_object import GameObject
 from settings import settings
 import pygame as pg
 
 
 # static objs only
-class GameObjectStaticSprite:
+class GameObjectStaticSprite(GameObject):
     # scale is the same as size
     # height_shift is the same o position in y, the bigger the value, the lower it will be placed
     # they must be individually set to each sprite
