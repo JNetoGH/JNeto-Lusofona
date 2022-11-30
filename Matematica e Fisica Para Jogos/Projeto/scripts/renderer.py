@@ -41,14 +41,15 @@ class Renderer:
         texture = pg.image.load(path).convert_alpha()
         return pg.transform.scale(texture, res)
 
+    # todo tem q ser definido pelo user junto com o mapa, n aqui
     # returns a dictionary in which the texture number is the key and the texture is value
     # at map.py, the numbers refers to what texture might be applied to the walls
     def load_wall_textures(self):
-
         return {
             1: self.get_texture("resources/wall_textures/1.png"),
             2: self.get_texture("resources/wall_textures/2.png"),
             3: self.get_texture("resources/wall_textures/3.png"),
             4: self.get_texture("resources/wall_textures/4.png"),
-            5: self.get_texture("resources/wall_textures/5.png")
+            5: self.get_texture("resources/wall_textures/5.png"),
+            6: self.get_texture("resources/wall_textures/6.png")
         }

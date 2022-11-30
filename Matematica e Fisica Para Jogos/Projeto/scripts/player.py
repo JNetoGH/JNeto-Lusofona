@@ -9,6 +9,15 @@ class Player:
         self.x, self.y = settings.PLAYER_INITIAL_POS
         self.angle = settings.PLAYER_ANGLE
 
+        # shooting
+        self.shot = False
+
+    # shooting
+    def single_fire_event(self, event):
+        if event.type == pg.MOUSEBUTTONDOWN:
+            if event.button == 1 and not self.shot:
+                self.shot = True
+
     def move(self):
         # increments in x-axis and y-axis
         dx, dy = 0, 0
