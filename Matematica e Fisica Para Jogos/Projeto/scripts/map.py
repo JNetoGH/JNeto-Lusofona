@@ -18,6 +18,16 @@ mini_map = [
 
 class Map:
     def __init__(self, game):
+
+        self.wall_textures_path_dictionary = {
+            1: "resources/wall_textures/1.png",
+            2: "resources/wall_textures/2.png",
+            3: "resources/wall_textures/3.png",
+            4: "resources/wall_textures/4.png",
+            5: "resources/wall_textures/5.png",
+            6: "resources/wall_textures/6.png"
+        }
+
         self.game = game
         self.mini_map = mini_map
         # dictionary that holds the coordinates of only numeric values, spaces are ignored
