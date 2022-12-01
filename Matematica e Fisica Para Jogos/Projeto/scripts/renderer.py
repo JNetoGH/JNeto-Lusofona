@@ -50,4 +50,3 @@ class Renderer:
         for key in textures_path_dic:
             textures_dic[key] = Renderer.get_texture(textures_path_dic[key])
         return textures_dic
-
