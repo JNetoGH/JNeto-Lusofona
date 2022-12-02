@@ -6,13 +6,10 @@ from settings import settings
 # It renders the sky, floor, walls and sprite objects, if there are more things they will be rendered by the Renderer as well
 class Renderer:
     def __init__(self, game):
-
         self.game = game
         self.screen = game.screen
-
         # holds a dictionary with all wall_textures
         self.wall_textures = self.load_wall_textures()
-
         #sky
         self.sky_image = self.get_texture("resources/wall_textures/sky.png", (settings.SCREEN_WIDTH, settings.SCREEN_HALF_HEIGHT))
         self.sky_offset = 0
@@ -22,7 +19,7 @@ class Renderer:
         self.render_game_objects()
 
     def draw_back_ground(self):
-        # sky: draw 2 images and conects them using the player mouse relative pos
+        # sky: draw 2 images and connects them using the player mouse relative pos
         self.sky_offset = (self.sky_offset + 4.5 * self.game.player.rel) % settings.SCREEN_WIDTH
         self.screen.blit(self.sky_image, (-self.sky_offset, 0))
         self.screen.blit(self.sky_image, (-self.sky_offset + settings.SCREEN_WIDTH, 0))

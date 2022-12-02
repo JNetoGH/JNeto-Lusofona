@@ -1,6 +1,5 @@
 import pygame as pg
 import sys
-
 from settings import settings
 from scripts.map import Map
 from scripts.player import Player
