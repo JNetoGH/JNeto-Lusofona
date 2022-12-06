@@ -8,15 +8,12 @@ class Tree(GameObjectStaticSprite):
     def __init__(self, game, pos):
         super().__init__(game, "resources/sprites/static_sprites/tree.png", initial_pos_tile_matrix=pos, scale=2, height_shift=-0.25)
 
-
 class Grass(GameObjectStaticSprite):
     def __init__(self, game, pos):
         super().__init__(game, "resources/sprites/static_sprites/grass.png", initial_pos_tile_matrix=pos, scale=0.25, height_shift=1.5)
 
-
 class Weapon(GameObjectAnimatedFixedOnScreen):
         pass
-
 
 if __name__ == "__main__":
     game = Game()
